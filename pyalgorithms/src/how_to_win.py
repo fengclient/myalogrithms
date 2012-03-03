@@ -30,10 +30,10 @@ def shakeit(node):
         shakeit(n)
 
 if __name__ == '__main__':
-    #state is a tuple with 3 elements: a_points,b_points,current_point,max_point,whosnext
     initstate=state.state()
     rootnode=tree.treenode(initstate)
     shakeit(rootnode)
+    print 'total instances:',state.state.instancecounter
     
 def printtree(node):
     if len(node.data.subnodes)==0:
