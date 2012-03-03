@@ -18,7 +18,7 @@ class state(object):
         '''
         self.a_points=[]
         self.b_points=[]
-        self.points=deque(range(1,30))
+        self.points=deque(range(1,11))
         self.whosnext='a'
         self.instanceid=state.instancecounter+1
         state.instancecounter=state.instancecounter+1
