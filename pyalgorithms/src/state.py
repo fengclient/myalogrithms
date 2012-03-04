@@ -1,7 +1,7 @@
 '''
 Created on 2012-3-3
 
-@author: xiaoftang
+@author: fengclient
 '''
 import copy
 from collections import deque

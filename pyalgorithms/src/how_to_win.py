@@ -21,7 +21,11 @@ A,B两个人交叉连续数数，从1数到30，谁先数到30谁就赢了。
 
 答案: 谁先数到3的倍数, 就能数到30, 因为他总能补足
 
-@author: xiaoftang
+为什么会有如下结果?
+total possibility: 144
+total instances: 287
+
+@author: fengclient
 '''
 import tree
 import state
@@ -48,21 +52,23 @@ def shakeit(node):
     for n in node.subnodes:
         shakeit(n)
 
-def printtree(node):
-    if len(node.subnodes) == 0:
-        print 'a_points:', node.data.a_points
-        print 'b_points:', node.data.b_points
-        winner = 'a' if node.data.a_points[-1] == 10 else 'b'
-        print 'winner is:', winner
-    else:
-        for i in node.subnodes:
-            printtree(i)
+possibility = 0
+
+def printdata(data):
+    global possibility
+    possibility = possibility + 1
+    print 'a_points:', data.a_points
+    print 'b_points:', data.b_points
+    winner = 'a' if data.a_points[-1] == 10 else 'b'
+    print 'winner is:', winner
 
 if __name__ == '__main__':
+    global possibility
     initstate = state.state()
     rootnode = tree.treenode(initstate)
     shakeit(rootnode)
-    printtree(rootnode)
+    tree.traverse(rootnode, printdata)
+    print 'total possibility:', possibility
     print 'total instances:', state.state.instancecounter
     
 
