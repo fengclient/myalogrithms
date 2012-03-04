@@ -30,16 +30,16 @@ def shakeit(node):
     '''
     shake the tree identified by node. 
     '''
-    data=node.data
-    if len(data.points)>0:
-        state1=data.clone()
+    data = node.data
+    if len(data.points) > 0:
+        state1 = data.clone()
         state1.shake(1)
         state1.switch()
-        node1=tree.treenode(state1)
-        state2=data.clone()
+        node1 = tree.treenode(state1)
+        state2 = data.clone()
         state2.shake(2)
         state2.switch()
-        node2=tree.treenode(state2)
+        node2 = tree.treenode(state2)
         node.subnodes.append(node1)
         node.subnodes.append(node2)
     else:
@@ -49,21 +49,21 @@ def shakeit(node):
         shakeit(n)
 
 def printtree(node):
-    if len(node.subnodes)==0:
-        print 'a_points:',node.data.a_points
-        print 'b_points:',node.data.b_points
-        winner='a' if node.data.a_points[-1]==10 else 'b'
-        print 'winner is:',winner
+    if len(node.subnodes) == 0:
+        print 'a_points:', node.data.a_points
+        print 'b_points:', node.data.b_points
+        winner = 'a' if node.data.a_points[-1] == 10 else 'b'
+        print 'winner is:', winner
     else:
         for i in node.subnodes:
             printtree(i)
 
 if __name__ == '__main__':
-    initstate=state.state()
-    rootnode=tree.treenode(initstate)
+    initstate = state.state()
+    rootnode = tree.treenode(initstate)
     shakeit(rootnode)
     printtree(rootnode)
-    print 'total instances:',state.state.instancecounter
+    print 'total instances:', state.state.instancecounter
     
 
         

@@ -9,9 +9,9 @@ class treenode(object):
     classdocs
     '''
 
-    def __init__(self,data):
+    def __init__(self, data):
         '''
         Constructor
         '''
-        self.data=data
-        self.subnodes=[]
+        self.data = data
+        self.subnodes = []
