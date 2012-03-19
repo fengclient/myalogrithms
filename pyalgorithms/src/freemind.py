@@ -6,6 +6,7 @@ Created on 2012-3-19
 '''
 from lxml import etree as ET
 import xlwt
+from argparse import ArgumentParser
 
 class FreeMindMap(object):
     '''
@@ -48,7 +49,6 @@ class FreeMindMap(object):
         workbooklines = []
         existing_dirs = []
         for line in lines:
-            print 'debug:', line
             case_dir = line[0]
             #create lines for directory of this case if it doesn't exist
             for i in range(1, len(case_dir)):
@@ -60,7 +60,7 @@ class FreeMindMap(object):
             workbooklines.append((len(case_dir), case_dir[-1], 0, line[1], line[1], '', '', line[2], '0'))
         return workbooklines
     
-    def save_excel(self):
+    def save_excel(self, output):
         origin_lines = self.get_origin_lines()
         wbk = xlwt.Workbook()
         sheet2 = wbk.add_sheet('FreeMind', cell_overwrite_ok = True)
@@ -72,9 +72,13 @@ class FreeMindMap(object):
             line = lines[l]
             for k in range(len(line)):
                 sheet2.write(l, k, line[k])
-        wbk.save('dummy.xls')
+        wbk.save(output)
 
 if __name__ == '__main__':
-    a = FreeMindMap('auto.mm')
-    a.save_excel()
-    #print '-'.join(e for e in (lines[0])) + ':' + '-'.join(e for e in lines[1:])
+    parser = ArgumentParser(description = 'convert freemind map(*.mm) to excel file(*.xls)')
+    parser.add_argument('input', nargs = 1, metavar = '<freemind map *.mm>')
+    parser.add_argument('output', nargs = 1, metavar = '<excel file *.xls>')
+    ns = parser.parse_args()
+    a = FreeMindMap(ns.input[0])
+    a.save_excel(ns.output[0])
+    print 'excel is writen as', ns.output[0]
