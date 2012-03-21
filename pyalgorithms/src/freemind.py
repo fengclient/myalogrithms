@@ -13,11 +13,14 @@ class FreeMindMap(object):
     classdocs
     '''
     
-    def __init__(self, path):
+    def __init__(self, file_name_or_filelike_obj):
         '''
         Constructor
         '''
-        f = open(path, 'r')
+        f = file_name_or_filelike_obj
+        we_own_it = not hasattr(f, 'read')
+        if we_own_it:
+            f = open(file_name_or_filelike_obj, 'r')
         self.xml = ET.fromstring(f.read())
         f.close()
     
