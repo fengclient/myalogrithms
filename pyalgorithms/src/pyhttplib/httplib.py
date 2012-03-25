@@ -9,7 +9,7 @@ from urllib2 import HTTPCookieProcessor, HTTPRedirectHandler, build_opener, Requ
 from cookielib import CookieJar, DefaultCookiePolicy, Cookie
 from StringIO import StringIO
 import gzip, zlib, struct
-
+from http_parser.pyparser import HttpParser
 
 def urlopen(url, data = None, cookiejar = None):
     '''
@@ -76,3 +76,15 @@ def buildcookie(uin, skey):
     cj.set_cookie(ck)
     cj.set_cookie(ck2)
     return cj
+
+def parse_request_from_file(path):
+    '''
+    parse request from file
+    '''
+    raw_http = open(path).read()
+    # if your are reading a text file from windows, u may need manually convert \n to \r\n
+    # universal newline support: http://docs.python.org/library/functions.html#open
+    raw_http = raw_http.replace('\n', '\r\n')
+    p = HttpParser()
+    p.execute(raw_http, len(raw_http))
+    return p
