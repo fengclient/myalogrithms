@@ -4,7 +4,7 @@ Created on 2012-5-7
 
 @author: fengclient
 '''
-from urllib2 import urlopen,HTTPError
+from urllib2 import urlopen,HTTPError,URLError
 from time import time
 import random
 random.seed(time())
@@ -47,9 +47,11 @@ def run(req_counter,err_counter,time_cost,index,stop_flag):
         #print 'thread(%d),count=%d'%(index,req_counter[index])
         start=time()
         try:
-            urlopen(r'http://s.com/convert?orig=http://%s/%d/%d'%(domain,index,req_counter[index]))
+            #urlopen(r'http://s.com/convert?orig=http://%s/%d/%d'%(domain,index,req_counter[index]))
+            urlopen(r'http://s.com/40236')
         except HTTPError as e:
-            #print 'http exception is catched:',e
+            err_counter[index]=err_counter[index]+1
+        except URLError as e:
             err_counter[index]=err_counter[index]+1
         end=time()
         time_cost[index]=time_cost[index]+(end-start)
