@@ -21,9 +21,10 @@ Please complete it, improve it and continue.
 Created by Falko Krause, minor modifications by Massimo Di Pierro and Ron McOuat
 
 2012-07-26: 
-Changed by xiaoftang: 
+Changed by fengclient: 
 1 force protocol=tcp on mysql and mysqldump
 2 set DAL options
+3 add primary key support
 '''
 import subprocess
 import re
