@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>JavaScript test for merge sort</title>
+<script type="text/javascript">
+
+function mergesort(nums)
+{
+	if(nums.length<2){
+		return;
+		}
+	m_sort(nums,0,nums.length-1);
+};
+
+function m_sort(nums,start,end)
+{
+	if(end-start<1){
+		return;
+	}
+	var middle=Math.floor((start+end)/2);
+	m_sort(nums,start,middle);
+	m_sort(nums,middle+1,end);
+	//console.log('merging:start=%d,middle=%d,end=%d',start,middle,end);
+	//start merging
+	var target=new Array(end-start+1);
+	var i,j,k;
+	for(i=start,j=middle+1,k=0;i<=middle&&j<=end;k++){
+		console.log('i=%d,j=%d',i,j);
+		if(nums[i]<=nums[j]){
+			console.log('%d<=%d',nums[i],nums[j]);
+			target[k]=nums[i];
+			i++;
+		}
+		else{
+			console.log('%d>%d',nums[i],nums[j]);
+			target[k]=nums[j];
+			j++;
+		}
+	}
+	if(i<=middle){
+		for(var x=i;x<=middle;x++,k++)
+			target[k]=nums[x];
+	}
+	if(j<=end){
+		for(var x=j;x<=end;x++,k++)
+			target[k]=nums[x];
+	}
+	//copy back to origin array
+	for(var l=0;l<target.length;l++){
+		nums[l+start]=target[l];
+	}
+};
+
+var numbers=new Array(1,2,3,1,45,2,45,0,100,0,0,4,5,667,1,667,54,1);
+console.log('before:',numbers);
+mergesort(numbers);
+console.log('after:',numbers);
+</script> 
+</head>
+<body>
+</body>
+</html>
