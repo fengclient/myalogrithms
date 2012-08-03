@@ -22,7 +22,17 @@ class treenode(object):
 
 def traverse(node, func):
     '''
-    traverse the tree
+    traverse the tree, recursive
+    '''
+    if len(node.subnodes) == 0:
+        func(node.data)
+    else:
+        for i in node.subnodes:
+            traverse(i, func)
+
+def traverse_loop(node, func):
+    '''
+    TODO: traverse the tree by loop
     '''
     if len(node.subnodes) == 0:
         func(node.data)
