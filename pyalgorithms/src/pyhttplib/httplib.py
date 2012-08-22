@@ -8,15 +8,9 @@ simple wrapper for urllib2 with cookie support(by cookielib)
 import cookielib
 import gzip, zlib, struct
 from StringIO import StringIO
-<<<<<<< HEAD:pyalgorithms/src/pyhttplib/myhttplib.py
 from urllib2 import HTTPCookieProcessor, HTTPRedirectHandler,\
                     HTTPDefaultErrorHandler, build_opener, Request, socket
 from http_parser.pyparser import HttpParser
-=======
-from urllib2 import HTTPCookieProcessor, HTTPRedirectHandler, \
-                    HTTPDefaultErrorHandler, build_opener, Request
-#from http_parser.pyparser import HttpParser
->>>>>>> 8af08e280bb3cbcf2cec6bd08a3778453d3da894:pyalgorithms/src/pyhttplib/httplib.py
 
 socket.setdefaulttimeout(10)
 
@@ -48,11 +42,7 @@ def urlopen(url, data = None, cookiejar = None):
     req = Request(url, headers = headers)
     req.add_data(data)
     resp = opener.open(req)
-<<<<<<< HEAD:pyalgorithms/src/pyhttplib/myhttplib.py
     resp_data = resp.read() if resp!=None else None
-=======
-    resp_data = resp.read() if resp != None else None
->>>>>>> 8af08e280bb3cbcf2cec6bd08a3778453d3da894:pyalgorithms/src/pyhttplib/httplib.py
     if resp and resp_data:
         # copied from feedparser.py(http://code.google.com/p/feedparser/source/browse/trunk/feedparser/feedparser.py)
         # if feed is gzip-compressed, decompress it
