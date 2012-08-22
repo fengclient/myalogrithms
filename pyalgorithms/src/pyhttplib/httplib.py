@@ -8,9 +8,9 @@ simple wrapper for urllib2 with cookie support(by cookielib)
 import cookielib
 import gzip, zlib, struct
 from StringIO import StringIO
-from urllib2 import HTTPCookieProcessor, HTTPRedirectHandler,\
+from urllib2 import HTTPCookieProcessor, HTTPRedirectHandler, \
                     HTTPDefaultErrorHandler, build_opener, Request
-from http_parser.pyparser import HttpParser
+#from http_parser.pyparser import HttpParser
 
 class MyHTTPRedirectHandler(HTTPRedirectHandler):
     def http_error_302(self, req, fp, code, msg, headers):
@@ -27,7 +27,7 @@ def urlopen(url, data = None, cookiejar = None):
     cj = cookielib.CookieJar(policy)
     cookiehandler = HTTPCookieProcessor(cj)
     redirect_handler = MyHTTPRedirectHandler()
-    opener = build_opener(cookiehandler,redirect_handler)
+    opener = build_opener(cookiehandler, redirect_handler)
     
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 5.0; en-GB; rv:1.8.1.12) Gecko/20080201 Firefox/2.0.0.12',
@@ -40,7 +40,7 @@ def urlopen(url, data = None, cookiejar = None):
     req = Request(url, headers = headers)
     req.add_data(data)
     resp = opener.open(req)
-    resp_data = resp.readlines() if resp!=None else None
+    resp_data = resp.read() if resp != None else None
     if resp and resp_data:
         # copied from feedparser.py(http://code.google.com/p/feedparser/source/browse/trunk/feedparser/feedparser.py)
         # if feed is gzip-compressed, decompress it
@@ -97,6 +97,6 @@ def parse_request_from_file(path):
     return p
 
 if __name__ == '__main__':
-    x=urlopen(r'http://localhost/40236')
+    x = urlopen(r'http://localhost/40236')
     print x
     print x[0].getcode()
