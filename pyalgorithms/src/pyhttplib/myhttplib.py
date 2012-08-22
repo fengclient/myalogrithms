@@ -9,8 +9,10 @@ import cookielib
 import gzip, zlib, struct
 from StringIO import StringIO
 from urllib2 import HTTPCookieProcessor, HTTPRedirectHandler,\
-                    HTTPDefaultErrorHandler, build_opener, Request
+                    HTTPDefaultErrorHandler, build_opener, Request, socket
 from http_parser.pyparser import HttpParser
+
+socket.setdefaulttimeout(10)
 
 class MyHTTPRedirectHandler(HTTPRedirectHandler):
     def http_error_302(self, req, fp, code, msg, headers):
@@ -40,7 +42,7 @@ def urlopen(url, data = None, cookiejar = None):
     req = Request(url, headers = headers)
     req.add_data(data)
     resp = opener.open(req)
-    resp_data = resp.readlines() if resp!=None else None
+    resp_data = resp.read() if resp!=None else None
     if resp and resp_data:
         # copied from feedparser.py(http://code.google.com/p/feedparser/source/browse/trunk/feedparser/feedparser.py)
         # if feed is gzip-compressed, decompress it
