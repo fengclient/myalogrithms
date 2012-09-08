@@ -1,7 +1,7 @@
 #coding=utf-8
 '''
 Created on 2012-5-7
-
+i've changed to use jmeter as concurrent engine.
 @author: fengclient
 '''
 from urllib2 import urlopen,HTTPError,URLError
